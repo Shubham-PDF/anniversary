@@ -204,7 +204,7 @@ export default function Home() {
               Twenty-five years ago, two paths became one. A journey that started with a promise has blossomed into a beautiful lifetime of shared dreams, boundless laughter, and unconditional love.
             </p>
             <p className="text-charcoal italic font-heading text-xl">
-              "Here's to the love that brought us here, and the journey that still lies ahead."
+              {"\"Here's to the love that brought us here, and the journey that still lies ahead.\""}
             </p>
           </div>
         </motion.div>
@@ -315,7 +315,7 @@ export default function Home() {
         >
           <h2 className="font-cursive text-5xl md:text-7xl text-gold-light mb-8">Join Us</h2>
           <p className="font-heading text-xl md:text-2xl font-light mb-12 max-w-lg mx-auto leading-relaxed text-ivory/80">
-            We can't wait to share this beautiful milestone with our closest family and friends.
+            {"We can't wait to share this beautiful milestone with our closest family and friends."}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
