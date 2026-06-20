@@ -54,64 +54,64 @@ export default function Home() {
           ))}
         </div>
 
-         <div className="flex flex-col items-center justify-center text-center z-10 w-full">
-           <motion.div 
-             className="flex text-[160px] md:text-[240px] leading-none font-heading font-light relative tracking-tighter"
-             initial={{ opacity: 0, scale: 0.9 }}
-             animate={{ opacity: 1, scale: 1 }}
-             transition={{ delay: 0.4, duration: 2.0, ease: "easeOut" }}
-           >
-             {["2", "5"].map((num, idx) => (
-               <motion.span
-                  key={idx}
-                  className="relative text-transparent bg-clip-text bg-gradient-to-br from-[#FFF5E1] via-[#D4AF37] to-[#8C6D3B] pb-4"
-                  style={{ 
-                    filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',
-                    WebkitTextStroke: '1px rgba(212, 175, 55, 0.3)'
+        <div className="flex flex-col items-center justify-center text-center z-10 w-full">
+          <motion.div
+            className="flex text-[160px] md:text-[240px] leading-none font-heading font-light relative tracking-tighter"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 2.0, ease: "easeOut" }}
+          >
+            {["2", "5"].map((num, idx) => (
+              <motion.span
+                key={idx}
+                className="relative text-transparent bg-clip-text bg-gradient-to-br from-[#FFF5E1] via-[#D4AF37] to-[#8C6D3B] pb-4"
+                style={{
+                  filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',
+                  WebkitTextStroke: '1px rgba(212, 175, 55, 0.3)'
+                }}
+              >
+                {num}
+                {/* Foil reflection effect overlay */}
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-tr from-transparent via-[rgba(255,255,255,0.8)] to-transparent opacity-0 mix-blend-overlay"
+                  animate={{
+                    left: ['-100%', '200%'],
+                    opacity: [0, 0.6, 0]
                   }}
-               >
-                 {num}
-                 {/* Foil reflection effect overlay */}
-                 <motion.span 
-                   className="absolute inset-0 bg-gradient-to-tr from-transparent via-[rgba(255,255,255,0.8)] to-transparent opacity-0 mix-blend-overlay"
-                   animate={{ 
-                     left: ['-100%', '200%'],
-                     opacity: [0, 0.6, 0]
-                   }}
-                   transition={{
-                     duration: 3,
-                     repeat: Infinity,
-                     repeatDelay: 3,
-                     ease: "easeInOut",
-                     delay: 1.0 + idx * 0.5
-                   }}
-                 />
-               </motion.span>
-             ))}
-           </motion.div>
-           
-           <motion.div
-             initial={{ opacity: 0, y: 30 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 1.0, delay: 1.6 }}
-             className="mt-0 flex flex-col items-center"
-           >
-             {/* Small top flourish */}
-             <motion.svg 
-               width="60" height="15" viewBox="0 0 60 15" fill="none" xmlns="http://www.w3.org/2000/svg"
-               className="mb-6 opacity-60"
-               initial={{ pathLength: 0, opacity: 0 }}
-               animate={{ pathLength: 1, opacity: 0.6 }}
-               transition={{ duration: 1.5, delay: 1.6 }}
-             >
-               <path d="M0 7.5C15 7.5 25 0.5 30 0.5C35 0.5 45 7.5 60 7.5" stroke="#C7A66B" strokeWidth="1"/>
-               <path d="M0 7.5C15 7.5 25 14.5 30 14.5C35 14.5 45 7.5 60 7.5" stroke="#C7A66B" strokeWidth="1"/>
-               <circle cx="30" cy="7.5" r="2.5" fill="#C7A66B"/>
-             </motion.svg>
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    ease: "easeInOut",
+                    delay: 1.0 + idx * 0.5
+                  }}
+                />
+              </motion.span>
+            ))}
+          </motion.div>
 
-             <h1 className="font-heading text-3xl md:text-5xl text-charcoal tracking-[0.05em] md:tracking-[0.1em] font-medium">
-               Years of Togetherness
-             </h1>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, delay: 1.6 }}
+            className="mt-0 flex flex-col items-center"
+          >
+            {/* Small top flourish */}
+            <motion.svg
+              width="60" height="15" viewBox="0 0 60 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+              className="mb-6 opacity-60"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 0.6 }}
+              transition={{ duration: 1.5, delay: 1.6 }}
+            >
+              <path d="M0 7.5C15 7.5 25 0.5 30 0.5C35 0.5 45 7.5 60 7.5" stroke="#C7A66B" strokeWidth="1" />
+              <path d="M0 7.5C15 7.5 25 14.5 30 14.5C35 14.5 45 7.5 60 7.5" stroke="#C7A66B" strokeWidth="1" />
+              <circle cx="30" cy="7.5" r="2.5" fill="#C7A66B" />
+            </motion.svg>
+
+            <h1 className="font-heading text-3xl md:text-5xl text-charcoal tracking-[0.05em] md:tracking-[0.1em] font-medium">
+              Years of Togetherness
+            </h1>
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -254,40 +254,40 @@ export default function Home() {
       {/* Section 4: Timeline of Events */}
       <section className="py-32 px-6 flex flex-col items-center justify-center bg-white relative">
         <div className="w-full max-w-3xl mx-auto">
-           <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             className="text-center mb-16"
-           >
-             <span className="text-gold tracking-[0.2em] text-xs md:text-sm uppercase mb-4 block">Schedule of the Evening</span>
-             <h2 className="font-heading text-4xl md:text-5xl text-charcoal">Order of Events</h2>
-           </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span className="text-gold tracking-[0.2em] text-xs md:text-sm uppercase mb-4 block">Schedule of the Evening</span>
+            <h2 className="font-heading text-4xl md:text-5xl text-charcoal">Order of Events</h2>
+          </motion.div>
 
-           <div className="relative border-l-[1px] border-gold-light/60 ml-4 md:ml-[50%]">
-              {[
-                { time: "7:00 PM", title: "Welcome Drinks", desc: "Arrival of guests & signature cocktails" },
-                { time: "8:00 PM", title: "Ring Ceremony", desc: "A special moment of vows" },
-                { time: "8:30 PM", title: "Cake Cutting", desc: "Celebrating 25 years of sweetness" },
-                { time: "9:00 PM", title: "Dinner & Music", desc: "A lavish feast and dancing the night away" },
-              ].map((item, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ delay: i * 0.15, duration: 0.8 }}
-                  className={`mb-12 relative ${i % 2 === 0 ? "md:-left-[calc(100%+2rem)] md:text-right ml-8 md:ml-0 md:pr-8" : "ml-8"}`}
-                >
-                  <div className={`absolute top-1.5 w-4 h-4 rounded-full bg-ivory border-[1.5px] border-gold flex items-center justify-center ${i % 2 === 0 ? "-left-[37px] md:left-auto md:-right-[41px]" : "-left-[37px]"}`}>
-                    <div className="w-1.5 h-1.5 bg-gold rounded-full"></div>
-                  </div>
-                  <span className="text-gold font-bold tracking-widest text-[10px] md:text-xs uppercase block mb-2">{item.time}</span>
-                  <h3 className="font-heading text-2xl md:text-3xl text-charcoal mb-2">{item.title}</h3>
-                  <p className="text-softgray text-sm md:text-base font-light">{item.desc}</p>
-                </motion.div>
-              ))}
-           </div>
+          <div className="relative border-l-[1px] border-gold-light/60 ml-4 md:ml-[50%]">
+            {[
+              { time: "7:00 PM", title: "Welcome Drinks", desc: "Arrival of guests & signature cocktails" },
+              { time: "8:00 PM", title: "Ring Ceremony", desc: "A special moment of vows" },
+              { time: "8:30 PM", title: "Cake Cutting", desc: "Celebrating 25 years of sweetness" },
+              { time: "9:00 PM", title: "Dinner & Music", desc: "A lavish feast and dancing the night away" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.15, duration: 0.8 }}
+                className={`mb-12 relative ${i % 2 === 0 ? "md:-left-[calc(100%+2rem)] md:text-right ml-8 md:ml-0 md:pr-8" : "ml-8"}`}
+              >
+                <div className={`absolute top-1.5 w-4 h-4 rounded-full bg-ivory border-[1.5px] border-gold flex items-center justify-center ${i % 2 === 0 ? "-left-[37px] md:left-auto md:-right-[41px]" : "-left-[37px]"}`}>
+                  <div className="w-1.5 h-1.5 bg-gold rounded-full"></div>
+                </div>
+                <span className="text-gold font-bold tracking-widest text-[10px] md:text-xs uppercase block mb-2">{item.time}</span>
+                <h3 className="font-heading text-2xl md:text-3xl text-charcoal mb-2">{item.title}</h3>
+                <p className="text-softgray text-sm md:text-base font-light">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -305,26 +305,59 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Section 5: Footer Invitation */}
+      {/* Section 5: Footer Invitation & Details */}
       <section className="py-32 px-6 flex flex-col items-center justify-center bg-charcoal text-ivory text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
+          className="w-full max-w-2xl"
         >
           <h2 className="font-cursive text-5xl md:text-7xl text-gold-light mb-8">Join Us</h2>
           <p className="font-heading text-xl md:text-2xl font-light mb-12 max-w-lg mx-auto leading-relaxed text-ivory/80">
             {"We can't wait to share this beautiful milestone with our closest family and friends."}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="px-8 py-4 bg-gold hover:bg-gold-light transition-colors text-charcoal tracking-widest uppercase text-sm font-semibold min-w-[220px]">
-              Accept with Pleasure
-            </button>
-            <button className="px-8 py-4 bg-transparent border-[1px] border-gold-light hover:bg-white/5 transition-colors text-gold-light tracking-widest uppercase text-sm font-semibold min-w-[220px]">
-              Decline with Regret
-            </button>
+          {/* More Information */}
+          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center text-ivory/80 text-sm md:text-base mb-12 max-w-xl mx-auto tracking-wide font-light">
+            <div>
+              <span className="block text-gold font-bold tracking-widest uppercase text-xs mb-2">Venue Address</span>
+              <p className="opacity-90">Raunak Hotel, Kalka Shimla Highway</p>
+              <p className="opacity-90">Pinjore, Haryana 134102</p>
+            </div>
+          </div>
+
+          {/* Directions Link */}
+          <div className="mb-16">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Raunak+Hotel+Pinjore+Haryana"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gold hover:bg-gold-light transition-colors text-charcoal tracking-widest uppercase text-sm font-semibold"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Get Directions
+            </a>
+          </div>
+
+          {/* Courtesy */}
+          <div className="pt-8 border-t border-gold-light/10 w-full max-w-md mx-auto">
+            <span className="block text-gold font-bold tracking-[0.2em] uppercase text-[10px] mb-2 opacity-80">With Best Compliments From</span>
+            <p className="font-cursive text-3xl text-gold-light">Friends & Family</p>
           </div>
         </motion.div>
       </section>
