@@ -36,7 +36,6 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Sanjay & Sangita's Silver Jubilee Celebration | 25 Years",
-  description: "Join us in celebrating the 25th wedding anniversary of Sanjay & Sangita. 30th June 2026 at Raunak Hotel, Pinjore. RSVP today.",
 };
 
 export default function RootLayout({
