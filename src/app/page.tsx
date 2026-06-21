@@ -273,7 +273,7 @@ export default function Home() {
           <div className="relative border-l-[1px] border-gold-light/60 ml-4 md:ml-[50%]">
             {[
               { time: "7:00 PM", title: "Welcome Drinks & Starters", desc: "Arrival of guests with welcome drinks & delicious starters" },
-              { time: "7:30 PM", title: "Ring Ceremony", desc: "A special moment of vows" },
+              { time: "7:30 PM", title: "Couple Entry", desc: "Welcoming the beautiful couple as they make their grand entrance" },
               { time: "8:00 PM", title: "Cake Cutting", desc: "Celebrating 25 years of sweetness" },
               { time: "9:00 PM", title: "Dinner & Music", desc: "A lavish feast and dancing the night away" },
             ].map((item, i) => (
