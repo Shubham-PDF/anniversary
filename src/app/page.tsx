@@ -120,20 +120,27 @@ export default function Home() {
             />
           </motion.div>
 
-          <div className="font-cursive text-6xl md:text-[100px] text-gold-dark mt-2 flex justify-center drop-shadow-sm">
-            {"Sanjay & Sangita".split("").map((char, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.8,
-                  delay: 3.0 + index * 0.05,
-                  ease: [0.2, 0.65, 0.3, 0.9],
-                }}
-              >
-                {char === " " ? "\u00A0\u00A0" : char}
-              </motion.span>
+          <div className="font-cursive text-5xl sm:text-7xl md:text-[100px] text-gold-dark mt-4 px-4 flex flex-wrap justify-center gap-x-4 drop-shadow-sm">
+            {["Sanjay", "&", "Sangita"].map((word, wordIdx) => (
+              <span key={wordIdx} className="flex whitespace-nowrap">
+                {word.split("").map((char, charIdx) => {
+                  const globalIdx = wordIdx * 10 + charIdx;
+                  return (
+                    <motion.span
+                      key={charIdx}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: 3.0 + globalIdx * 0.05,
+                        ease: [0.2, 0.65, 0.3, 0.9],
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  );
+                })}
+              </span>
             ))}
           </div>
 
@@ -266,9 +273,9 @@ export default function Home() {
 
           <div className="relative border-l-[1px] border-gold-light/60 ml-4 md:ml-[50%]">
             {[
-              { time: "7:00 PM", title: "Welcome Drinks", desc: "Arrival of guests & signature cocktails" },
-              { time: "8:00 PM", title: "Ring Ceremony", desc: "A special moment of vows" },
-              { time: "8:30 PM", title: "Cake Cutting", desc: "Celebrating 25 years of sweetness" },
+              { time: "7:00 PM", title: "Welcome Drinks & Starters", desc: "Arrival of guests with welcome drinks & delicious starters" },
+              { time: "7:30 PM", title: "Ring Ceremony", desc: "A special moment of vows" },
+              { time: "8:00 PM", title: "Cake Cutting", desc: "Celebrating 25 years of sweetness" },
               { time: "9:00 PM", title: "Dinner & Music", desc: "A lavish feast and dancing the night away" },
             ].map((item, i) => (
               <motion.div
@@ -328,31 +335,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Directions Link */}
-          <div className="mb-16">
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Raunak+Hotel+Pinjore+Haryana"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gold hover:bg-gold-light transition-colors text-charcoal tracking-widest uppercase text-sm font-semibold"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Get Directions
-            </a>
-          </div>
+          {/* Spacer */}
+          <div className="mb-8" />
 
           {/* Courtesy */}
           <div className="pt-8 border-t border-gold-light/10 w-full max-w-md mx-auto">
