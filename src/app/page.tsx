@@ -64,28 +64,27 @@ export default function Home() {
             {["2", "5"].map((num, idx) => (
               <motion.span
                 key={idx}
-                className="relative text-transparent bg-clip-text bg-gradient-to-br from-[#FFF5E1] via-[#D4AF37] to-[#8C6D3B] pb-4"
+                className="relative text-transparent bg-clip-text pb-4"
                 style={{
-                  filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',
-                  WebkitTextStroke: '1px rgba(212, 175, 55, 0.3)'
+                  backgroundImage: 'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.8) 50%, transparent 70%), linear-gradient(135deg, #FFF5E1 0%, #D4AF37 50%, #8C6D3B 100%)',
+                  backgroundSize: '200% auto, auto',
+                  backgroundRepeat: 'no-repeat, no-repeat',
+                  filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.15))',
+                  WebkitTextStroke: '1px rgba(212, 175, 55, 0.35)',
+                  WebkitBackgroundClip: 'text',
+                }}
+                animate={{
+                  backgroundPosition: ['200% 0, 0 0', '-200% 0, 0 0'],
+                }}
+                transition={{
+                  duration: 4.5,
+                  repeat: Infinity,
+                  repeatDelay: 2.0,
+                  ease: "easeInOut",
+                  delay: 1.0 + idx * 0.6
                 }}
               >
                 {num}
-                {/* Foil reflection effect overlay */}
-                <motion.span
-                  className="absolute inset-0 bg-gradient-to-tr from-transparent via-[rgba(255,255,255,0.8)] to-transparent opacity-0 mix-blend-overlay"
-                  animate={{
-                    left: ['-100%', '200%'],
-                    opacity: [0, 0.6, 0]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatDelay: 3,
-                    ease: "easeInOut",
-                    delay: 1.0 + idx * 0.5
-                  }}
-                />
               </motion.span>
             ))}
           </motion.div>
