@@ -8,10 +8,58 @@ import Countdown from "@/components/Countdown";
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     setMounted(true);
+
+    const playAudio = () => {
+      if (audioRef.current) {
+        audioRef.current.volume = 1.0;
+        audioRef.current.play()
+          .then(() => {
+            console.log("Audio started successfully on user interaction!");
+            cleanup();
+          })
+          .catch((err) => {
+            console.warn("Audio playback retry failed:", err);
+          });
+      }
+    };
+
+    const cleanup = () => {
+      window.removeEventListener("click", playAudio);
+      window.removeEventListener("touchstart", playAudio);
+      window.removeEventListener("keydown", playAudio);
+    };
+
+    // Unconditionally bind interaction listeners immediately on mount
+    window.addEventListener("click", playAudio);
+    window.addEventListener("touchstart", playAudio);
+    window.addEventListener("keydown", playAudio);
+
+    // Silent initial autoplay attempt
+    if (audioRef.current) {
+      audioRef.current.volume = 1.0;
+      audioRef.current.play()
+        .then(() => {
+          console.log("Autoplay succeeded!");
+          cleanup();
+        })
+        .catch(() => {
+          console.log("Autoplay blocked. Waiting for first user interaction (click/tap) to play music.");
+        });
+    }
+
+    return cleanup;
   }, []);
+
+  const scrollToNextSection = () => {
+    const nextSection = document.getElementById("couple-section");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -66,7 +114,7 @@ export default function Home() {
                 key={idx}
                 className="relative text-transparent bg-clip-text pb-4"
                 style={{
-                  backgroundImage: 'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.8) 50%, transparent 70%), linear-gradient(135deg, #FFF5E1 0%, #D4AF37 50%, #8C6D3B 100%)',
+                  backgroundImage: 'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.8) 50%, transparent 70%), linear-gradient(45deg, #FFF5E1 0%, #D4AF37 50%, #8C6D3B 100%)',
                   backgroundSize: '200% auto, auto',
                   backgroundRepeat: 'no-repeat, no-repeat',
                   filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.15))',
@@ -155,33 +203,36 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Downward arrow indicator */}
-        <motion.div
+        {/* Clickable Downward arrow indicator */}
+        <motion.button
+          onClick={scrollToNextSection}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.3 }}
+          animate={{ opacity: 0.5 }}
+          whileHover={{ opacity: 1, scale: 1.05 }}
           transition={{ delay: 5.0, duration: 1.5 }}
-          className="absolute bottom-8 flex flex-col items-center text-charcoal"
+          className="absolute bottom-6 flex flex-col items-center text-charcoal cursor-pointer z-20 focus:outline-none"
         >
+          <span className="font-heading text-[10px] tracking-[0.2em] uppercase mb-2 opacity-80">Scroll Down</span>
           <motion.svg
             xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+            animate={{ y: [0, 5, 0] }}
+            transition={{ repeat: Infinity, duration: 2.0, ease: "easeInOut" }}
           >
             <path d="M12 5v14M19 12l-7 7-7-7" />
           </motion.svg>
-        </motion.div>
+        </motion.button>
       </motion.section>
 
       {/* Section 2: Couple Image & Note */}
-      <section className="min-h-[100svh] flex flex-col items-center justify-center py-24 px-6">
+      <section id="couple-section" className="min-h-[100svh] flex flex-col items-center justify-center py-24 px-6">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -189,19 +240,87 @@ export default function Home() {
           transition={{ duration: 1 }}
           className="w-full max-w-lg mx-auto flex flex-col items-center"
         >
-          <div className="relative w-[80vw] max-w-[400px] aspect-[4/5] rounded-t-full overflow-hidden border-8 border-white shadow-xl mb-10">
-            {/* Fallback styling in case image is missing */}
-            <div className="absolute inset-0 bg-gold-light/20 flex items-center justify-center text-gold text-sm font-heading">
-              Image: public/images/couple.png
-            </div>
-            <Image
-              src="/images/couple.png"
-              alt="Sanjay and Sangita"
-              fill
-              className="object-cover relative z-10"
-              priority
+          <div className="relative w-[80vw] max-w-[400px] aspect-[4/5] mb-10">
+            {/* Soft gold backdrop glow */}
+            <div className="absolute inset-0 bg-[#D4AF37]/5 blur-3xl rounded-full pointer-events-none z-0"></div>
+
+            {/* Premium concentric floating borders */}
+            <motion.div
+              className="absolute -inset-6 rounded-t-full border border-gold/20 z-0 pointer-events-none"
+              animate={{
+                scale: [1, 1.015, 1],
+                rotate: [0, 0.5, 0]
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             />
-            <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-t-full z-20 pointer-events-none"></div>
+            <motion.div
+              className="absolute -inset-3 rounded-t-full border border-gold/30 z-0 pointer-events-none"
+              animate={{
+                scale: [1, 1.01, 1],
+                rotate: [0, -0.5, 0]
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }}
+            />
+
+            {/* Elegant classic gold foil corner flourish notches */}
+            <div className="absolute -top-4 -left-4 w-6 h-6 z-20 pointer-events-none">
+              <div className="absolute top-0 left-0 w-6 h-[1.5px] bg-gradient-to-r from-gold-light to-gold"></div>
+              <div className="absolute top-0 left-0 w-[1.5px] h-6 bg-gradient-to-b from-gold-light to-gold"></div>
+              <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 rounded-full bg-gold"></div>
+            </div>
+            <div className="absolute -top-4 -right-4 w-6 h-6 z-20 pointer-events-none">
+              <div className="absolute top-0 right-0 w-6 h-[1.5px] bg-gradient-to-l from-gold-light to-gold"></div>
+              <div className="absolute top-0 right-0 w-[1.5px] h-6 bg-gradient-to-b from-gold-light to-gold"></div>
+              <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-gold"></div>
+            </div>
+
+            {/* Sparkle particles floating along the frame sides */}
+            {[...Array(4)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1.5 h-1.5 bg-gold/60 rounded-full z-20"
+                style={{
+                  top: `${20 + i * 20}%`,
+                  left: i % 2 === 0 ? "-1.5rem" : "calc(100% + 1.2rem)",
+                }}
+                animate={{
+                  y: [0, -15, 0],
+                  opacity: [0.3, 0.9, 0.3],
+                  scale: [1, 1.3, 1],
+                }}
+                transition={{
+                  duration: 4.5 + i,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.4,
+                }}
+              />
+            ))}
+
+            {/* Main Arch Image Frame */}
+            <div className="relative w-full h-full rounded-t-full overflow-hidden border-[6px] border-white shadow-[0_15px_35px_rgba(0,0,0,0.08)] z-10">
+              {/* Fallback styling in case image is missing */}
+              <div className="absolute inset-0 bg-gold-light/20 flex items-center justify-center text-gold text-sm font-heading">
+                Image: public/images/couple.png
+              </div>
+              <Image
+                src="/images/couple.png"
+                alt="Sanjay and Sangita"
+                fill
+                className="object-cover relative z-10 hover:scale-105 transition-transform duration-1000"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent z-20 pointer-events-none" />
+            </div>
           </div>
 
           <div className="text-center max-w-md">
@@ -344,6 +463,9 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      {/* Background Audio */}
+      <audio ref={audioRef} src="/Audio/sound.mp3" loop preload="auto" autoPlay />
     </div>
   );
 }
